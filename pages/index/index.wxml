@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<import src='../ratingbar/ratingbar' />
+
+<view class='container'>
+
+<navigator url='../search/search'>
+  <view class='page-search'>
+    <input placeholder='搜索'></input>
+  </view>
+</navigator>
+
+  <!-- 数据展示部分 -->
+  <scroll-view class='scroll-view' scroll-y>
+    <block wx:for='{{movies}}' wx:key=''>
+      <navigator url='../movie/movie?id={{item.id}}'>
+        <view class='item' style='border:2rpx solid blue;'>
+          <image class='poster' src='{{item.images.large}}'></image>
+      <view class='meta'>
+        <text>{{item.original_title}}（{{item.year}}）              
+        </text>
+        <text class='sub-title'>
+          <text class='artists' wx:for='{{item.directors}}' wx:key=''>{{item.name}}</text>
+        </text>
+      </view>
+      <template is='template-ratingbar-stars' data='{{...item.rating}}' />
+      <view class='rating'>
+           <text>{{item.rating.average}}</text> 
+       </view>
+        </view>
+      </navigator>  
+    </block>
+  </scroll-view>
+</view>
